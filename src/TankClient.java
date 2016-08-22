@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -41,6 +43,18 @@ public class TankClient extends Frame{
 //            }
 //        }
 //    }
+    //实现接口需要完成各种函数，而继承adapter可以只关心自己需要的那个函数
+    private class KeyMonitor extends KeyAdapter {
+        @Override
+        public void keyPressed(KeyEvent e) {
+//            System.out.println("loaded!");
+            int key = e.getKeyCode();
+            if (key == KeyEvent.VK_RIGHT) x += 5;
+            else if (key == KeyEvent.VK_LEFT) x -= 5;
+            else if (key == KeyEvent.VK_UP) y -= 5;
+            else if (key == KeyEvent.VK_DOWN) y += 5;
+        }
+    }
     private class PaintThread implements Runnable {
     @Override
     public void run() {
@@ -61,8 +75,6 @@ public class TankClient extends Frame{
         g.setColor(Color.RED);
         g.fillOval(x, y, 30, 30);
         g.setColor(c);
-        y += 5;
-        x += 5;
     }
 
     public void launchFrame() {
@@ -75,6 +87,7 @@ public class TankClient extends Frame{
                 System.exit(0);
             }
         });
+        addKeyListener(new KeyMonitor());
         setTitle("TankWar");
         setResizable(false);
         setVisible(true);
