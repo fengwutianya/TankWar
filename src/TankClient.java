@@ -13,7 +13,7 @@ import java.awt.event.WindowEvent;
 public class TankClient extends Frame{
     public static final int GAME_WIDTH = 800;
     public static final int GAME_HEIGHT = 600;
-    int x = 50; int y = 50;
+    Tank myTank = new Tank(50, 50);
     Image offScreenImage = null;
 
     @Override
@@ -48,11 +48,7 @@ public class TankClient extends Frame{
         @Override
         public void keyPressed(KeyEvent e) {
 //            System.out.println("loaded!");
-            int key = e.getKeyCode();
-            if (key == KeyEvent.VK_RIGHT) x += 5;
-            else if (key == KeyEvent.VK_LEFT) x -= 5;
-            else if (key == KeyEvent.VK_UP) y -= 5;
-            else if (key == KeyEvent.VK_DOWN) y += 5;
+            myTank.keyPressed(e);
         }
     }
     private class PaintThread implements Runnable {
@@ -71,10 +67,7 @@ public class TankClient extends Frame{
 
     @Override
     public void paint(Graphics g) {
-        Color c = g.getColor();
-        g.setColor(Color.RED);
-        g.fillOval(x, y, 30, 30);
-        g.setColor(c);
+        myTank.draw(g);
     }
 
     public void launchFrame() {
