@@ -5,13 +5,28 @@ import java.awt.event.WindowEvent;
 /**
  * IDE: Ctrl+Alt+T包裹代码
  * IDE: Ctrl+o重写父类代码
- * Java: 线程调用paint(), paint()调用repaint(), 内部类最好
+ * Java: 线程调用paint(), paint()调用update()调用repaint(), 内部类最好
  * Created by xuan on 2016/8/22.
  */
 public class TankClient extends Frame{
     int x = 50; int y = 50;
+    Image offScreenImage = null;
 
-//    private class PaintThread extends Thread {
+    @Override
+    public void update(Graphics g) {
+        if (offScreenImage == null) {
+            offScreenImage = this.createImage(800, 600);
+        }
+        Graphics gOffScreen = offScreenImage.getGraphics();
+        Color c = gOffScreen.getColor();
+        gOffScreen.setColor(Color.GREEN);
+        gOffScreen.fillRect(0, 0, 800, 600);
+        gOffScreen.setColor(c);
+        paint(gOffScreen);
+        g.drawImage(offScreenImage, 0, 0, null);
+    }
+
+    //    private class PaintThread extends Thread {
 //        @Override
 //        public void run() {
 //            while (true) {
@@ -50,6 +65,7 @@ public class TankClient extends Frame{
 
     public void launchFrame() {
         setLocation(200, 200);
+        setBackground(Color.GREEN);
         setSize(800, 600);
         addWindowListener(new WindowAdapter() {
             @Override
