@@ -14,6 +14,7 @@ public class TankClient extends Frame{
     public static final int GAME_WIDTH = 800;
     public static final int GAME_HEIGHT = 600;
     Tank myTank = new Tank(50, 50);
+    Missile m = new Missile(50, 50, Tank.Direction.R);
     Image offScreenImage = null;
 
     @Override
@@ -73,6 +74,7 @@ public class TankClient extends Frame{
     @Override
     public void paint(Graphics g) {
         myTank.draw(g);
+        m.draw(g);
     }
 
     public void launchFrame() {
