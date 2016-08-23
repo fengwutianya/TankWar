@@ -7,7 +7,7 @@ import java.awt.event.WindowEvent;
 /**
  * IDE: Ctrl+Alt+T包裹代码
  * IDE: Ctrl+o重写父类代码
- * Java: 线程调用paint(), paint()调用update()调用repaint(), 内部类最好
+ * Java: 线程调用repaint(), repaint()调用update()调用paint(), 内部类最好
  * Created by xuan on 2016/8/22.
  */
 public class TankClient extends Frame{
