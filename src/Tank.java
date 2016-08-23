@@ -9,6 +9,7 @@ public class Tank {
     private boolean bL = false, bR = false, bU = false, bD = false;
     enum Direction {L, LU, U, RU, R, RD, D, LD, STOP}
     private Direction dir = Direction.STOP;
+    private Direction gunDir = Direction.R;
     public static final int XSPEED = 15;
     public static final int YSPEED = 15;
     public static final int WIDTH = 30;
@@ -90,6 +91,7 @@ public class Tank {
                 break;
         }
         locationDirection();
+        if (dir != Direction.STOP) gunDir = dir;
     }
 
     public void keyReleased(KeyEvent e) {
@@ -121,12 +123,13 @@ public class Tank {
         else if (!bL && !bU && !bR && bD)       dir = Direction.D;
         else if (bL && !bU && !bR && bD)        dir = Direction.LD;
         else                                    dir = Direction.STOP;
+
     }
 
     public Missile fire() {
         int x = this.x + Tank.WIDTH/2 - Missile.WIDTH/2;
         int y = this.y + Tank.HEIGHT/2 - Missile.HEIGHT/2;
-        Missile m = new Missile(x, y, dir);
+        Missile m = new Missile(x, y, gunDir);
         return m;
     }
 }
