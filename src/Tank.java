@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
  */
 public class Tank {
     private int x, y;
+    public static final int SPEED = 15;
 
     public Tank(int x, int y) {
         this.x = x;
@@ -21,9 +22,9 @@ public class Tank {
 
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
-        if (key == KeyEvent.VK_RIGHT) x += 5;
-        else if (key == KeyEvent.VK_LEFT) x -= 5;
-        else if (key == KeyEvent.VK_UP) y -= 5;
-        else if (key == KeyEvent.VK_DOWN) y += 5;
+        if (key == KeyEvent.VK_RIGHT) x += SPEED;
+        else if (key == KeyEvent.VK_LEFT) x -= SPEED;
+        else if (key == KeyEvent.VK_UP) y -= SPEED;
+        else if (key == KeyEvent.VK_DOWN) y += SPEED;
     }
 }
