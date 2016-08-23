@@ -50,6 +50,11 @@ public class TankClient extends Frame{
 //            System.out.println("loaded!");
             myTank.keyPressed(e);
         }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+            myTank.keyReleased(e);
+        }
     }
     private class PaintThread implements Runnable {
     @Override
