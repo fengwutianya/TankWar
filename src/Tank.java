@@ -66,6 +66,7 @@ public class Tank {
         g.setColor(c);
 
         move();
+//        System.out.println("Tank" + x + " " + y);
     }
 
     public void keyPressed(KeyEvent e) {
@@ -73,6 +74,7 @@ public class Tank {
         switch (key) {
             case KeyEvent.VK_CONTROL:
                 tc.m = fire();
+//                System.out.println("Tank" + x + " " + y);
                 break;
             case KeyEvent.VK_LEFT:
                 bL = true;
