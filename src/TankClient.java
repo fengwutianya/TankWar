@@ -76,8 +76,13 @@ public class TankClient extends Frame{
     @Override
     public void paint(Graphics g) {
         myTank.draw(g);
-        for (Missile m : missiles)
-            m.draw(g);
+        for (int i = 0; i < missiles.size(); i++) { //此处用foreach会出错，迭代修改
+            Missile m =missiles.get(i);
+            if (!m.isLive())
+                missiles.remove(m);
+            else
+                m.draw(g);
+        }
     }
 
     public void launchFrame() {

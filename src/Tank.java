@@ -58,6 +58,10 @@ public class Tank {
             case STOP:
                 break;
         }
+        if (x < 0) x = 0;
+        if (y < 25) y = 25;
+        if (x + Tank.WIDTH > TankClient.GAME_WIDTH) x = TankClient.GAME_WIDTH - Tank.WIDTH;
+        if (y + Tank.HEIGHT > TankClient.GAME_HEIGHT) y = TankClient.GAME_HEIGHT - Tank.HEIGHT;
     }
 
     public void draw(Graphics g) {
