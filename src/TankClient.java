@@ -15,7 +15,8 @@ import java.util.ArrayList;
 public class TankClient extends Frame{
     public static final int GAME_WIDTH = 800;
     public static final int GAME_HEIGHT = 600;
-    Tank myTank = new Tank(50, 50, this);
+    Tank myTank = new Tank(50, 50, true, this);
+    Tank enemyTank = new Tank(100, 100, false, this);
     List<Missile> missiles = new ArrayList<>();
     Image offScreenImage = null;
 
@@ -76,6 +77,7 @@ public class TankClient extends Frame{
     @Override
     public void paint(Graphics g) {
         myTank.draw(g);
+        enemyTank.draw(g);
         for (int i = 0; i < missiles.size(); i++) { //此处用foreach会出错，迭代修改
             Missile m =missiles.get(i);
             if (!m.isLive())

@@ -15,13 +15,15 @@ public class Tank {
     public static final int WIDTH = 30;
     public static final int HEIGHT = 30;
     private TankClient tc;
+    private boolean good;
 
-    public Tank(int x, int y) {
+    public Tank(int x, int y, boolean good) {
         this.x = x;
         this.y = y;
+        this.good = good;
     }
-    public Tank(int x, int y, TankClient tc) {
-        this(x, y);
+    public Tank(int x, int y, boolean good, TankClient tc) {
+        this(x, y, good);
         this.tc = tc;
     }
 
@@ -66,7 +68,8 @@ public class Tank {
 
     public void draw(Graphics g) {
         Color c = g.getColor();
-        g.setColor(Color.RED);
+        if (good) g.setColor(Color.RED);
+        else g.setColor(Color.BLUE);
         g.fillOval(x, y, WIDTH, HEIGHT);
         g.setColor(c);
         switch (gunDir) {
