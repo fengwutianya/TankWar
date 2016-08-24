@@ -1,4 +1,6 @@
 import java.awt.*;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by xuan on 2016/8/23.
@@ -77,7 +79,15 @@ public class Missile {
             t.setLive(false);
             tc.explodes.add(new Explode(x, y, tc));
             return true;
+        }
+        return false;
+    }
 
+    public boolean hitTanks(List<Tank> tanks) {
+        for (int i = 0; i < tanks.size(); i++) {
+            if (hitTank(tanks.get(i))) {
+                return true;
+            }
         }
         return false;
     }

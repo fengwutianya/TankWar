@@ -16,9 +16,10 @@ public class TankClient extends Frame{
     public static final int GAME_WIDTH = 800;
     public static final int GAME_HEIGHT = 600;
     Tank myTank = new Tank(50, 50, true, this);
-    Tank enemyTank = new Tank(100, 100, false, this);
+//    Tank enemyTank = new Tank(100, 100, false, this);
     List<Missile> missiles = new ArrayList<>();
     List<Explode> explodes = new ArrayList<>();
+    List<Tank> tanks = new ArrayList<>();
     Image offScreenImage = null;
 //    Explode e = new Explode(150, 150, this);
 
@@ -79,11 +80,16 @@ public class TankClient extends Frame{
     @Override
     public void paint(Graphics g) {
         myTank.draw(g);
-        enemyTank.draw(g);
+//        enemyTank.draw(g);
 //        e.draw(g);
         for (int i = 0; i < explodes.size(); i++) {
             Explode e = explodes.get(i);
             e.draw(g);
+        }
+        for (int i = 0; i < tanks.size(); i++) {
+            Tank enemyTank = tanks.get(i);
+            if (!enemyTank.isLive()) tanks.remove(enemyTank);
+            else enemyTank.draw(g);
         }
         for (int i = 0; i < missiles.size(); i++) { //此处用foreach会出错，迭代修改
             Missile m =missiles.get(i);
@@ -91,7 +97,7 @@ public class TankClient extends Frame{
                 missiles.remove(m);
             else {
                 m.draw(g);
-                if (enemyTank.isLive() && m.hitTank(enemyTank)) {
+                if (m.hitTanks(tanks)) {
                     missiles.remove(m);
                 }
             }
@@ -113,6 +119,9 @@ public class TankClient extends Frame{
         setResizable(false);
         setVisible(true);
         new Thread(new PaintThread()).start();
+        for (int i = 0; i < 10; i++) {
+            tanks.add(new Tank(100+50*i, 50+50*i, false, this));
+        }
     }
     public static void main(String[] args) {
         TankClient tc = new TankClient();
