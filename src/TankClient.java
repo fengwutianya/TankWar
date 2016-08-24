@@ -82,8 +82,12 @@ public class TankClient extends Frame{
             Missile m =missiles.get(i);
             if (!m.isLive())
                 missiles.remove(m);
-            else
+            else {
                 m.draw(g);
+                if (enemyTank.isLive() && m.hitTank(enemyTank)) {
+                    missiles.remove(m);
+                }
+            }
         }
     }
 

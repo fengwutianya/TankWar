@@ -65,4 +65,16 @@ public class Missile {
         if (x<0 || y<0 || x > TankClient.GAME_WIDTH || y > TankClient.GAME_HEIGHT)
             live = false;
     }
+
+    public Rectangle getRect() {
+        return new Rectangle(x, y, Missile.WIDTH, Missile.HEIGHT);
+    }
+
+    public boolean hitTank(Tank t) {
+        if (this.getRect().intersects(t.getRect())) {
+            t.setLive(false);
+            return true;
+        }
+        return false;
+    }
 }
