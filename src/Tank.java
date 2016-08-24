@@ -93,16 +93,14 @@ public class Tank {
         }
 
         move();
+        g.drawString("missiles: " + tc.missiles.size(), 60, 60);
 //        System.out.println("Tank" + x + " " + y);
     }
 
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
         switch (key) {
-            case KeyEvent.VK_CONTROL:
-                tc.m = fire();
-//                System.out.println("Tank" + x + " " + y);
-                break;
+
             case KeyEvent.VK_LEFT:
                 bL = true;
                 break;
@@ -123,6 +121,10 @@ public class Tank {
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();
         switch (key) {
+            case KeyEvent.VK_CONTROL:
+                fire();
+//                System.out.println("Tank" + x + " " + y);
+                break;
             case KeyEvent.VK_LEFT:
                 bL = false;
                 break;
@@ -152,10 +154,9 @@ public class Tank {
 
     }
 
-    public Missile fire() {
+    public void fire() {
         int x = this.x + Tank.WIDTH/2 - Missile.WIDTH/2;
         int y = this.y + Tank.HEIGHT/2 - Missile.HEIGHT/2;
-        Missile m = new Missile(x, y, gunDir);
-        return m;
+        tc.missiles.add(new Missile(x, y, gunDir));
     }
 }

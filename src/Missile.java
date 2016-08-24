@@ -5,8 +5,8 @@ import java.awt.*;
  */
 public class Missile {
     private int x, y;
-    public static final int XSPEED = 20;
-    public static final int YSPEED = 20;
+    public static final int XSPEED = 30;
+    public static final int YSPEED = 30;
     public static final int WIDTH = 10;
     public static final int HEIGHT = 10;
     Tank.Direction dir;
