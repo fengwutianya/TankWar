@@ -11,15 +11,17 @@ public class Missile {
     public static final int HEIGHT = 10;
     Tank.Direction dir;
     private boolean live = true;
+    private TankClient tc = null;
 
     public boolean isLive() {
         return live;
     }
 
-    public Missile(int x, int y, Tank.Direction dir) {
+    public Missile(int x, int y, Tank.Direction dir, TankClient tc) {
         this.y = y;
         this.x = x;
         this.dir = dir;
+        this.tc = tc;
 //        System.out.println(x + " " + y + " " + dir);
     }
 
@@ -73,7 +75,9 @@ public class Missile {
     public boolean hitTank(Tank t) {
         if (this.getRect().intersects(t.getRect())) {
             t.setLive(false);
+            tc.explodes.add(new Explode(x, y, tc));
             return true;
+
         }
         return false;
     }

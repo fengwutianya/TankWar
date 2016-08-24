@@ -110,7 +110,8 @@ public class Tank {
         }
 
         move();
-        g.drawString("missiles: " + tc.missiles.size(), 60, 60);
+//        g.drawString("missiles: " + tc.missiles.size(), 60, 60);
+//        g.drawString("explodes" + tc.explodes.size(), 60, 80);
 //        System.out.println("Tank" + x + " " + y);
     }
 
@@ -174,7 +175,7 @@ public class Tank {
     public void fire() {
         int x = this.x + Tank.WIDTH/2 - Missile.WIDTH/2;
         int y = this.y + Tank.HEIGHT/2 - Missile.HEIGHT/2;
-        tc.missiles.add(new Missile(x, y, gunDir));
+        tc.missiles.add(new Missile(x, y, gunDir, tc));
     }
 
     public Rectangle getRect() {

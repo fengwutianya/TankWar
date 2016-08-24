@@ -18,7 +18,9 @@ public class TankClient extends Frame{
     Tank myTank = new Tank(50, 50, true, this);
     Tank enemyTank = new Tank(100, 100, false, this);
     List<Missile> missiles = new ArrayList<>();
+    List<Explode> explodes = new ArrayList<>();
     Image offScreenImage = null;
+//    Explode e = new Explode(150, 150, this);
 
     @Override
     public void update(Graphics g) {
@@ -78,6 +80,11 @@ public class TankClient extends Frame{
     public void paint(Graphics g) {
         myTank.draw(g);
         enemyTank.draw(g);
+//        e.draw(g);
+        for (int i = 0; i < explodes.size(); i++) {
+            Explode e = explodes.get(i);
+            e.draw(g);
+        }
         for (int i = 0; i < missiles.size(); i++) { //此处用foreach会出错，迭代修改
             Missile m =missiles.get(i);
             if (!m.isLive())
