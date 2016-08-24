@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 
 /**
  * Created by xuan on 2016/8/23.
@@ -17,6 +18,7 @@ public class Tank {
     private TankClient tc;
     private boolean good;
     private boolean live = true;
+    private static Random r = new Random();
 
     public void setLive(boolean live) {
         this.live = live;
@@ -73,6 +75,12 @@ public class Tank {
         if (y < 25) y = 25;
         if (x + Tank.WIDTH > TankClient.GAME_WIDTH) x = TankClient.GAME_WIDTH - Tank.WIDTH;
         if (y + Tank.HEIGHT > TankClient.GAME_HEIGHT) y = TankClient.GAME_HEIGHT - Tank.HEIGHT;
+
+        if (!good) {
+            Direction[] dirs = Direction.values();
+            int rn = r.nextInt(dirs.length);
+            dir = dirs[rn];
+        }
     }
 
     public void draw(Graphics g) {
