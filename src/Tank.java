@@ -19,9 +19,14 @@ public class Tank {
     private boolean good;
     private boolean live = true;
     private static Random r = new Random();
+    private int step = r.nextInt(12) + 3;
 
     public void setLive(boolean live) {
         this.live = live;
+    }
+
+    public boolean isGood() {
+        return good;
     }
 
     public boolean isLive() {
@@ -78,8 +83,12 @@ public class Tank {
 
         if (!good) {
             Direction[] dirs = Direction.values();
-            int rn = r.nextInt(dirs.length);
-            dir = dirs[rn];
+            if (step == 0) {
+                int rn = r.nextInt(dirs.length);
+                dir = dirs[rn];
+                step = r.nextInt(12) + 3;
+            }
+            step --;
         }
     }
 
@@ -121,6 +130,8 @@ public class Tank {
 //        g.drawString("missiles: " + tc.missiles.size(), 60, 60);
 //        g.drawString("explodes" + tc.explodes.size(), 60, 80);
 //        System.out.println("Tank" + x + " " + y);
+        int rn = r.nextInt(40);
+        if (rn > 38 && !good) fire();
     }
 
     public void keyPressed(KeyEvent e) {
@@ -181,9 +192,10 @@ public class Tank {
     }
 
     public void fire() {
+        if (!this.live) return;
         int x = this.x + Tank.WIDTH/2 - Missile.WIDTH/2;
         int y = this.y + Tank.HEIGHT/2 - Missile.HEIGHT/2;
-        tc.missiles.add(new Missile(x, y, gunDir, tc));
+        tc.missiles.add(new Missile(x, y, good, gunDir, tc));
     }
 
     public Rectangle getRect() {
